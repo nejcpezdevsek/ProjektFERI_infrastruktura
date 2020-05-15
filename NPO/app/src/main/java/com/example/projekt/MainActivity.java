@@ -3,14 +3,23 @@ package com.example.projekt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+
+    final static int REQUEST_CODE = 0;
+    ImageView imageV;
 
     private SensorManager sensorManager;
     Sensor accelerometer;
@@ -24,6 +33,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button CameraButton = findViewById(R.id.cameraButton);
+
+        CameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(i, REQUEST_CODE);
+            }
+        });
+
         gyroscopeTV = findViewById(R.id.gyroscopeTV);
         accelerometerTV = findViewById(R.id.accelerometerTV);
 
@@ -36,6 +55,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        super.onActivityResult(requestCode, resultCode, intent);
+        if(resultCode == RESULT_OK){
+            Bundle extras = intent.getExtras();
+            Bitmap data = (Bitmap) extras.get("data");
+            imageV = (ImageView) findViewById(R.id.capturedImage);
+            imageV.setImageBitmap(data);
+        }
+    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i){
