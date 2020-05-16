@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var phoneDataController = require('../controllers/phoneDataController.js');
 
+var multer = require('multer');
+var upload = multer({ dest: 'public/images/' });
+
 /*
  * GET
  */
@@ -15,7 +18,7 @@ router.get('/:id', phoneDataController.show);
 /*
  * POST
  */
-router.post('/', phoneDataController.create);
+router.post('/', upload.single("image"), phoneDataController.create);
 
 /*
  * PUT

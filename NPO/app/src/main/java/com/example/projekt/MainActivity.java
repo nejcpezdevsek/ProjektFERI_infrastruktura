@@ -4,6 +4,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,22 +20,41 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.UploadNotificationConfig;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     final static int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageV;
 
-    String currentPhotoPath;
+    String currentPhotoPath = "";
 
     private SensorManager sensorManager;
     Sensor accelerometer;
@@ -47,7 +68,21 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+          /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Upload";
+            String description = "Uploading image notification.";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+        }*/
+
         Button CameraButton = findViewById(R.id.cameraButton);
+        Button SendData = findViewById(R.id.sendData);
 
         imageV = findViewById(R.id.capturedImage);
 
@@ -66,6 +101,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), "com.example.projekt.fileprovider", photoFile);
                     i.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                     startActivityForResult(i, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
+
+        SendData.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(!currentPhotoPath.equals("")){
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            uploadMultipart();
+                        }
+                    });
+                    thread.start();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Nothing to upload!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -140,5 +192,35 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
         imageV.setImageBitmap(bitmap);
+    }
+
+    public void uploadMultipart() {
+        try {
+            URL url = new URL("http://192.168.64.100:3000/phonedata/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            List<NameValuePair> params = new ArrayList<>();
+            params.add(new BasicNameValuePair("gyroscope", gyroscopeTV.getText().toString()));
+            params.add(new BasicNameValuePair("accelerometer", accelerometerTV.getText().toString()));
+            params.add(new BasicNameValuePair("image", currentPhotoPath));
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, StandardCharsets.UTF_8));
+            writer.write(String.valueOf(params));
+            writer.flush();
+            writer.close();
+            os.close();
+
+            conn.connect();
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Upload Successful!", Toast.LENGTH_SHORT).show());
+        } catch (Exception exc) {
+            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
