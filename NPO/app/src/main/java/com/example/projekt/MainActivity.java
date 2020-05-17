@@ -81,10 +81,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             notificationManager.createNotificationChannel(channel);
         }*/
 
+        Button GPSButton = findViewById(R.id.GPSButton);
         Button CameraButton = findViewById(R.id.cameraButton);
         Button SendData = findViewById(R.id.sendData);
 
         imageV = findViewById(R.id.capturedImage);
+
+        GPSButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getBaseContext(), GpsActivity.class);
+                startActivity(i);
+            }
+        });
 
         CameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,11 +167,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent sensorEvent){
         if(sensorEvent.sensor.getType() == Sensor.TYPE_GYROSCOPE){
-            String reading = "X: " + sensorEvent.values[0] + "\n" + "Y: " + sensorEvent.values[1] + "\n" + "Z: " + sensorEvent.values[2];
+            String reading = "\nX: " + sensorEvent.values[0] + "\n" + "Y: " + sensorEvent.values[1] + "\n" + "Z: " + sensorEvent.values[2];
             gyroscopeTV.setText(reading);
         }
         if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-            String reading = "X: " + sensorEvent.values[0] + "\n" + "Y: " + sensorEvent.values[1] + "\n" + "Z: " + sensorEvent.values[2];
+            String reading = "\nX: " + sensorEvent.values[0] + "\n" + "Y: " + sensorEvent.values[1] + "\n" + "Z: " + sensorEvent.values[2];
             accelerometerTV.setText(reading);
         }
     }
