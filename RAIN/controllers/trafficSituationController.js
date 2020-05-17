@@ -44,6 +44,22 @@ module.exports = {
     },
 
     /**
+     * trafficSituationController.showPregledPodatkov()
+     */
+    showPregledPodatkov: function (req, res) {
+        res.render('pregled_podatkov/list');
+    }
+    ,
+
+    /**
+     * phoneDataController.showZajeteSlike()
+     */
+    showZajeteSlike: function (req, res) {
+        res.render('zajete_slike/list');
+   }
+   ,
+
+    /**
      * trafficSituationController.create()
      */
     create: function (req, res) {

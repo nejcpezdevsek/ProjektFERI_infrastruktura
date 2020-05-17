@@ -44,6 +44,14 @@ module.exports = {
     },
 
     /**
+     * phoneDataController.showZajeteSlike()
+     */
+    showZajeteSlike: function (req, res) {
+        res.render('zajete_slike/list');
+    }
+    ,
+
+    /**
      * phoneDataController.create()
      */
     create: function (req, res) {
@@ -65,6 +73,7 @@ module.exports = {
             return res.status(201).json(phoneData);
         });
     },
+
 
     /**
      * phoneDataController.update()

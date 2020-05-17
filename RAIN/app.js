@@ -22,7 +22,7 @@ var trafficSituationRouter = require('./routes/trafficSituationRoutes');
 var cors = require('cors');
 var allowedOrigins = ['http://localhost:4200','http://localhost:3000',
   'http://yourapp.com'];
-app.use(cors({
+/*app.use(cors({
   credentials: true,
   origin: function(origin, callback){
     // allow requests with no origin
@@ -35,7 +35,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+}));*/
 
 var app = express();
 

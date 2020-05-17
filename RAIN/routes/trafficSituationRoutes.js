@@ -6,11 +6,8 @@ var trafficSituationController = require('../controllers/trafficSituationControl
  * GET
  */
 router.get('/', trafficSituationController.list);
-
-/*
- * GET
- */
 router.get('/:id', trafficSituationController.show);
+router.get('/pregled_podatkov/list', trafficSituationController.showPregledPodatkov)
 
 /*
  * POST
