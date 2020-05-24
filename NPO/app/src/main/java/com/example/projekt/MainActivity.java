@@ -21,25 +21,26 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.UploadNotificationConfig;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,18 +69,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-          /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Upload";
-            String description = "Uploading image notification.";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("1", name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            assert notificationManager != null;
-            notificationManager.createNotificationChannel(channel);
-        }*/
 
         Button GPSButton = findViewById(R.id.GPSButton);
         Button CameraButton = findViewById(R.id.cameraButton);
@@ -205,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void uploadMultipart() {
         try {
-            URL url = new URL("http://192.168.64.100:3000/phonedata/");
+            URL url = new URL("http://192.168.64.100:3000/phonedata");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
@@ -213,23 +202,61 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
+            Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
+            Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.2), (int)(bitmap.getHeight()*0.2), true);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+
+
+            byte[] byteArray= stream.toByteArray();
+            String imageString= Base64.encodeToString(byteArray, Base64.DEFAULT);
+
             List<NameValuePair> params = new ArrayList<>();
+            params.add(new BasicNameValuePair("phone_name", Build.MODEL));
             params.add(new BasicNameValuePair("gyroscope", gyroscopeTV.getText().toString()));
             params.add(new BasicNameValuePair("accelerometer", accelerometerTV.getText().toString()));
-            params.add(new BasicNameValuePair("image", currentPhotoPath));
+            params.add(new BasicNameValuePair("image", imageString));
 
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, StandardCharsets.UTF_8));
-            writer.write(String.valueOf(params));
+            writer.write(getQuery(params));
             writer.flush();
             writer.close();
             os.close();
 
+            int responseCode=conn.getResponseCode();
+
             conn.connect();
-            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Upload Successful!", Toast.LENGTH_SHORT).show());
+            if(responseCode==201){
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Upload Successful!", Toast.LENGTH_SHORT).show());
+            }else{
+                runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Error! Response code: "+responseCode, Toast.LENGTH_SHORT).show());
+            }
         } catch (Exception exc) {
             Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String getQuery(List<NameValuePair> params) throws UnsupportedEncodingException
+    {
+        StringBuilder result = new StringBuilder();
+        boolean first = true;
+
+        for (NameValuePair pair : params)
+        {
+            if (first)
+                first = false;
+            else
+                result.append("&");
+
+            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+            result.append("=");
+            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+        }
+
+        return result.toString();
     }
 }
