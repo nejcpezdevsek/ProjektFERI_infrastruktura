@@ -7,7 +7,7 @@ var logger = require('morgan');
 //povezava z bazo
 var mongoose = require('mongoose');
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1:27017/vaja3';
+var mongoDB = 'mongodb://127.0.0.1:27017/projekt';
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
@@ -47,6 +47,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 app.use('/', indexRouter);
@@ -59,7 +60,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

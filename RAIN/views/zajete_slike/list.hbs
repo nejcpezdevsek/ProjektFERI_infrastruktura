@@ -1,1 +1,13 @@
-<h1>Tukaj bodo zajete slike, njihovi opisi, ko bodo razpoznane z ORV algoritmom.</h1>
+<h1 class="prikaz" style="text-align: center"> Prikaz zajetih podatkov s telefona</h1>
+{{#each this}}
+    <div id="{{_id}}" class="container p-5 my-5">
+        <h3 style="margin-top: -10px">Phone name: {{phone_name}}</h3>
+        <div class="prikazSlik">
+            <img src="data:image/jpg;base64,{{image}}" alt="?" style="transform:rotate(90deg);" width="200px" height="200px" class="prikazSlik">
+        </div>
+        <div class="prikazData">
+            <p><b>Pospeškometer:</b> {{accelerometer}}</p>
+            <p><b>Žiroskop:</b> {{gyroscope}}</p>
+        </div>
+    </div>
+{{/each}}

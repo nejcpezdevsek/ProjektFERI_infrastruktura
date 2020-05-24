@@ -10,7 +10,7 @@ var upload = multer({ dest: 'public/images/' });
  */
 router.get('/', phoneDataController.list);
 router.get('/:id', phoneDataController.show);
-router.get('/zajete_slike/list', phoneDataController.showZajeteSlike)
+//router.get('/zajete_slike/list', phoneDataController.showZajeteSlike);
 
 /*
  * POST

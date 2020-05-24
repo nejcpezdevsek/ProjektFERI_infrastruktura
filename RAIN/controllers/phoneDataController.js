@@ -18,7 +18,7 @@ module.exports = {
                     error: err
                 });
             }
-            return res.json(phoneDatas);
+            return res.render("zajete_slike/list", phoneDatas);
         });
     },
 
