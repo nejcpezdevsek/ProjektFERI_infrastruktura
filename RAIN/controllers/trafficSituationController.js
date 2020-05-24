@@ -18,6 +18,7 @@ module.exports = {
                     error: err
                 });
             }
+            console.log(trafficSituations);
             return res.json(trafficSituations);
         });
     },

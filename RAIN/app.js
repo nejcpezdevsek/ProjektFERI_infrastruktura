@@ -7,7 +7,7 @@ var logger = require('morgan');
 //povezava z bazo
 var mongoose = require('mongoose');
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1:27017/projekt';
+var mongoDB = 'mongodb://127.0.0.1/projekt';
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
