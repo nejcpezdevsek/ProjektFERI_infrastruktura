@@ -4,13 +4,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageDecoder;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -19,8 +16,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -46,9 +44,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -58,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     String currentPhotoPath = "";
 
     private SensorManager sensorManager;
+    Vibrator v;
     Sensor accelerometer;
     Sensor gyroscope;
 
@@ -66,13 +62,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     MyApp App;
 
+    //*SPREMENLJIVKE ZA ALGORITEM PREPOZNAVE SLABE CESTE*//
+    double X, Y, Z;
+    private double mAccel;
+    private double mAccelCurrent;
+    private double mAccelLast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         App = (MyApp) getApplication();
-
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         Button GPSButton = findViewById(R.id.GPSButton);
         Button CameraButton = findViewById(R.id.cameraButton);
         Button SendData = findViewById(R.id.sendData);
@@ -155,6 +157,17 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     }
 
+    private int compare(int X, int Y, int Z) {
+        X = Math.abs(X);
+        Y = Math.abs(Y);
+        Z = Math.abs(Z);
+        if (X > Y) {
+            if (X > Z) return 0;
+        } else if (Y > Z) return 1;
+        else return 2;
+
+        return -1;
+    }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent){
@@ -165,6 +178,39 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         if(sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER){
             String reading = "\nX: " + sensorEvent.values[0] + "\n" + "Y: " + sensorEvent.values[1] + "\n" + "Z: " + sensorEvent.values[2];
             accelerometerTV.setText(reading);
+
+            //dobim vrednosti X,Y,Z od pospeškometra
+            X = sensorEvent.values[0];
+            Y = sensorEvent.values[1];
+            Z = sensorEvent.values[2];
+            //trenutno vrednost pospeškometra shranim v mAccelLast
+            mAccelLast = mAccelCurrent;
+            //izračunam trenutno vrednost pospeškometra
+            mAccelCurrent = Math.sqrt(Math.pow(X, 2) + Math.pow(Y, 2) + Math.pow(Z, 2));
+            //izračunam razliko med izračunanim pospeškom in prejšnjim pospeškom, ki sem ga shranil
+            double delta = mAccelCurrent - mAccelLast;
+            //izračunam pospešek
+            mAccel = mAccel * 0.9f + delta;
+            //dobim, katera koordinata je, ali X, Y, Z
+            int temp = compare((int) X, (int) Y, (int) Z);
+            if (temp == 0) {
+                if ((mAccelLast - mAccelCurrent) > 7) {
+                    Toast.makeText(this, "Luknja na X", Toast.LENGTH_SHORT).show();
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+
+                }
+            } else if (temp == 1) {
+                if ((mAccelLast - mAccelCurrent) > 7) {
+                    Toast.makeText(this, "Luknja na Y", Toast.LENGTH_SHORT).show();
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                }
+            } else if (temp == 2) {
+                if ((mAccelLast - mAccelCurrent) > 7) {
+                      Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+
+                }
+            }
         }
     }
 
