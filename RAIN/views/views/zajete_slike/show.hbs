@@ -1,0 +1,24 @@
+<div id="map" style="width: 1000px; height: 800px; margin: auto">
+
+</div>
+
+<script>
+    // Initialize and add the map
+    function initMap() {
+        mapPosition({{latitude}}, {{longitude}});
+    }
+
+    function mapPosition(latitude, longitude) {
+        console.log(latitude);
+        latitude = parseFloat(latitude);
+        longitude = parseFloat(longitude);
+        var position = {lat: latitude, lng: longitude};
+        var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 4, center: position});
+        var marker = new google.maps.Marker({position: position, map: map});
+    }
+
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPPXrvm8dTN5VBKtRHi3wPJknhY0YBBzM&callback=initMap">
+</script>

@@ -1,0 +1,28 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.prikaz{
+  width: 40%;
+  margin: auto;
+}
+
+.prikazSlik{
+  float:left;
+  margin-right: 15px;
+  border-right: 1px solid black;
+}
+
+.prikazData{
+  overflow: hidden;
+  font-size: large;
+}
+
+.container{
+  border-radius: 30px;
+  background-color: #B4B4B4;
+}
