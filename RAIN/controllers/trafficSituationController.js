@@ -19,7 +19,7 @@ module.exports = {
                 });
             }
             console.log(trafficSituations);
-            return res.render("pregled_podatkov/list", trafficSituations);
+            return res.render("views/pregled_podatkov/list", trafficSituations);
         });
     },
 

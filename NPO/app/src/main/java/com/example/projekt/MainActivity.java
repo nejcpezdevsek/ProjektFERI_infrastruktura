@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 }
             } else if (temp == 2) {
                 if ((mAccelLast - mAccelCurrent) > 7) {
-                      Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
                     v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
 
                 }
