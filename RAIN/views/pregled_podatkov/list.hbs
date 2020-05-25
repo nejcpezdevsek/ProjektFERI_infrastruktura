@@ -1,3 +1,6 @@
+<script>
+    var polje = []
+</script>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -8,9 +11,12 @@
   </thead>
   <tbody>
     {{#each this}}
-    <td>{{ime}}</td>
-    <td>{{priimek}}</td>
-    <td>{{starost}}</td>
+    <tr>
+        <td>{{ime}}</td>
+        <td>{{priimek}}</td>
+        <td>{{starost}}</td>
+        <script>polje.push(parseInt({{starost}}))</script>
+    </tr>
     {{/each}}   
   </tbody>
 </table>
@@ -24,7 +30,7 @@ var myChart = new Chart(ctx, {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: polje,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
