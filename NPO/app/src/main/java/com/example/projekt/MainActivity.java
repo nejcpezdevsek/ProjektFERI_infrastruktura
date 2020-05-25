@@ -64,11 +64,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView gyroscopeTV;
     TextView accelerometerTV;
 
+    MyApp App;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        App = (MyApp) getApplication();
 
         Button GPSButton = findViewById(R.id.GPSButton);
         Button CameraButton = findViewById(R.id.cameraButton);
@@ -106,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         SendData.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                if(!currentPhotoPath.equals("")){
+                if(!currentPhotoPath.equals("") && App.isSetLocation){
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                     });
                     thread.start();
                 }else{
-                    Toast.makeText(getApplicationContext(), "Nothing to upload!", Toast.LENGTH_SHORT).show();
+                    runOnUiThread(() ->Toast.makeText(getApplicationContext(), "Nothing to upload!", Toast.LENGTH_SHORT).show());
                 }
             }
         });
@@ -218,6 +221,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             params.add(new BasicNameValuePair("gyroscope", gyroscopeTV.getText().toString()));
             params.add(new BasicNameValuePair("accelerometer", accelerometerTV.getText().toString()));
             params.add(new BasicNameValuePair("image", imageString));
+            params.add(new BasicNameValuePair("latitude", App.getLocation().getLatitude()+""));
+            params.add(new BasicNameValuePair("longitude", App.getLocation().getLongitude()+""));
 
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
@@ -236,7 +241,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Error! Response code: "+responseCode, Toast.LENGTH_SHORT).show());
             }
         } catch (Exception exc) {
-            Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show();
+            runOnUiThread(() ->Toast.makeText(this, exc.getMessage(), Toast.LENGTH_SHORT).show());
         }
     }
 

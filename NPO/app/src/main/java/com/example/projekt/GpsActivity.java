@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class GpsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    MyApp App;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
@@ -32,6 +33,7 @@ public class GpsActivity extends FragmentActivity implements OnMapReadyCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gps);
+        App = (MyApp) getApplication();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
     }
@@ -48,6 +50,7 @@ public class GpsActivity extends FragmentActivity implements OnMapReadyCallback 
             public void onSuccess(Location location) {
                 if(location != null){
                     currentLocation = location;
+                    App.setLocation(currentLocation);
                     Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
                     supportMapFragment.getMapAsync(GpsActivity.this);
