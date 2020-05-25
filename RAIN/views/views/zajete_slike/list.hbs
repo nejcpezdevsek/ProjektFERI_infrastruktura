@@ -1,0 +1,17 @@
+<h1 class="prikaz" style="text-align: center"> Prikaz zajetih podatkov s telefona</h1>
+{{#each phoneDatas}}
+    <a href="phonedata/{{_id}}" style="text-decoration: none;color: black">
+        <div class="container p-5 my-5">
+            <h3 style="margin-top: -10px">Phone name: {{phone_name}}</h3>
+            <div class="prikazSlik">
+                <img src="data:image/jpg;base64,{{image}}" alt="?" style="transform:rotate(90deg);" width="200px" height="200px" class="prikazSlik">
+            </div>
+            <div class="prikazData">
+                <p><b>Pospeškometer:</b> {{accelerometer}}</p>
+                <p><b>Žiroskop:</b> {{gyroscope}}</p>
+                <p><b>Zemljepisna širina:</b> {{latitude}}</p>
+                <p><b>Zemljepisna dolžina:</b> {{longitude}}</p>
+            </div>
+        </div>
+    </a>
+{{/each}}

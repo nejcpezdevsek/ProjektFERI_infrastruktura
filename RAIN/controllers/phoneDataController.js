@@ -18,7 +18,7 @@ module.exports = {
                     error: err
                 });
             }
-            return res.render("zajete_slike/list", phoneDatas);
+            return res.render("views/zajete_slike/list", {phoneDatas:phoneDatas});
         });
     },
 
@@ -39,7 +39,7 @@ module.exports = {
                     message: 'No such phoneData'
                 });
             }
-            return res.json(phoneData);
+            return res.render("views/zajete_slike/show", phoneData);
         });
     },
 
@@ -47,7 +47,7 @@ module.exports = {
      * phoneDataController.showZajeteSlike()
      */
     showZajeteSlike: function (req, res) {
-        res.render('zajete_slike/list');
+        res.render('views/zajete_slike/list');
     }
     ,
 
@@ -59,7 +59,10 @@ module.exports = {
 			phone_name : req.body.phone_name,
 			gyroscope : req.body.gyroscope,
 			accelerometer : req.body.accelerometer,
-			image : req.body.image
+			image : req.body.image,
+            latitude : req.body.latitude,
+            longitude : req.body.longitude
+
 
         });
 
