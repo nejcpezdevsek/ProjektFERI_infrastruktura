@@ -2,10 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-
 def scrape():
     try:
-        result = requests.get("httaps://www.rtvslo.si/stanje-na-cestah")
+        result = requests.get("https://www.rtvslo.si/stanje-na-cestah")
     except requests.ConnectionError as e:
         print(e)
 
@@ -23,11 +22,10 @@ def scrape():
             vzr = temp[1].split(':')
             vzrok.append(vzr[1])
 
-    data = {}
-    data['nesrece'] = []
+    data = []
     #print(len(cesta))
     for i in range(0, len(cesta)):
-        data['nesrece'].append({
+        data.append({
             'cesta': cesta[i],
             'lokacija': lok[i],
             'vzrok': vzrok[i]
@@ -38,7 +36,7 @@ def scrape():
 
     #Send a post request with the json file to the website
     try:
-        response = requests.post('localhost:3000/trafficsituation', json=data)
+        response = requests.post('http://localhost:3000/trafficsituation', json=data)
         #print(response.status_code)
     except requests.exceptions.RequestException as e:
         print(e)

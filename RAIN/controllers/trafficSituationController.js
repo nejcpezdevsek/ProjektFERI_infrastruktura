@@ -18,8 +18,7 @@ module.exports = {
                     error: err
                 });
             }
-            console.log(trafficSituations);
-            return res.render("views/pregled_podatkov/list", trafficSituations);
+            return res.render("pregled_podatkov/list", trafficSituations);
         });
     },
 
@@ -64,11 +63,12 @@ module.exports = {
      * trafficSituationController.create()
      */
     create: function (req, res) {
-        var trafficSituation = new trafficSituationModel({
-			date : req.body.date,
-			road : req.body.road,
-			description : req.body.description
-
+        var trafficSituation;
+        //console.log(req.body[0].cesta)
+        req.body.forEach(element => {trafficSituation = new trafficSituationModel({
+            cesta : element.cesta,
+            lokacija : element.lokacija,
+            vzrok : element.vzrok
         });
 
         trafficSituation.save(function (err, trafficSituation) {
@@ -78,8 +78,8 @@ module.exports = {
                     error: err
                 });
             }
-            return res.status(201).json(trafficSituation);
-        });
+        });});
+        return res.status(201).json(trafficSituation);
     },
 
     /**
