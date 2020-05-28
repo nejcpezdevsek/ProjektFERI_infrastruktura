@@ -25,11 +25,10 @@ def scrape():
                 lok.append(temp[1])
                 vzrok.append(vzr[1])
 
-    data = {}
-    data['nesrece'] = []
+    data = []
     # print(len(cesta))
     for i in range(0, len(cesta)):
-        data['nesrece'].append({
+        data.append({
             'cesta': cesta[i],
             'lokacija': lok[i],
             'vzrok': vzrok[i]

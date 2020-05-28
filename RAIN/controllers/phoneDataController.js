@@ -1,5 +1,5 @@
 var phoneDataModel = require('../models/phoneDataModel.js');
-
+//var spawn = require('child_process').spawn
 /**
  * phoneDataController.js
  *
@@ -11,6 +11,15 @@ module.exports = {
      * phoneDataController.list()
      */
     list: function (req, res) {
+        // spawn new child process to call the python script
+        // collect data from script
+        const spawn = require('child_process').spawn
+        const python = spawn('python', ['C:\\Users\\nejci\\OneDrive - Univerza v Mariboru\\FAKS\\PROJEKTI\\RAIN\\controllers\\hello.py']);
+        python.stdout.on('data', function (data) {
+            console.log('Pipe data from python script ...');
+            console.log(data.toString())
+           });
+
         phoneDataModel.find(function (err, phoneDatas) {
             if (err) {
                 return res.status(500).json({
