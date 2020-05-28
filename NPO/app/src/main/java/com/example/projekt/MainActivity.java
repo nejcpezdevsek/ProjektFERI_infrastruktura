@@ -243,8 +243,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void uploadMultipart() {
         try {
-            URL url = new URL("http://192.168.1.191:3000/phonedata");
-            HttpURLConnection conn = (HttpURLConnection) url+.openConnection();
+            URL url = new URL("http://192.168.2.28:3000/phonedata");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("POST");
