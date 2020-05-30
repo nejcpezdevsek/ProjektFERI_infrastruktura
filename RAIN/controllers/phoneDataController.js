@@ -65,7 +65,7 @@ module.exports = {
         });
 
         const spawn = require('child_process').spawn
-        const python = spawn('python', ['../ORV/DetekcijaZnakov/hello.py',req.body.image]);
+        const python = spawn('python', ['../ORV/DetekcijaZnakov/skripta/sign_recog.py',req.body.image]);
 
         python.stdout.on('data', function (data) {
             console.log('Pipe data from python script ...');
