@@ -17,10 +17,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GpsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -62,11 +66,20 @@ public class GpsActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("I am here");
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.addMarker(markerOptions);
+
+        for (Map.Entry<LatLng,String> i : App.getBumps().entrySet()){
+        googleMap.addMarker(new MarkerOptions()
+                .position(i.getKey())
+                .title("Bump")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                .snippet(i.getValue()));
+        }
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

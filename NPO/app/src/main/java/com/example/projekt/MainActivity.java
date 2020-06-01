@@ -2,16 +2,19 @@ package com.example.projekt;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +28,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -45,7 +55,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener {
+public class MainActivity<ArrayListList> extends AppCompatActivity implements SensorEventListener {
 
     final static int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imageV;
@@ -67,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private double mAccel;
     private double mAccelCurrent;
     private double mAccelLast;
+
+    // GPS SPREMENLJIVKE
+    private static final int REQUEST_CODE = 101;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(MainActivity.this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -169,6 +187,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         return -1;
     }
 
+    private void bumpDetected() {
+        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(location -> {
+            if(location != null){
+                currentLocation = location;
+            App.addBump(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()));
+            //Toast.makeText(getApplicationContext(),bumps.size(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent){
         if(sensorEvent.sensor.getType() == Sensor.TYPE_GYROSCOPE){
@@ -194,21 +228,22 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             //dobim, katera koordinata je, ali X, Y, Z
             int temp = compare((int) X, (int) Y, (int) Z);
             if (temp == 0) {
-                if ((mAccelLast - mAccelCurrent) > 7) {
-                    Toast.makeText(this, "Luknja na X", Toast.LENGTH_SHORT).show();
-                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-
+                if ((mAccelLast - mAccelCurrent) > 3) {
+                   // Toast.makeText(this, "Luknja na X", Toast.LENGTH_SHORT).show();
+                    //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    bumpDetected();
                 }
             } else if (temp == 1) {
-                if ((mAccelLast - mAccelCurrent) > 7) {
-                    Toast.makeText(this, "Luknja na Y", Toast.LENGTH_SHORT).show();
-                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                if ((mAccelLast - mAccelCurrent) > 3) {
+                    //Toast.makeText(this, "Luknja na Y", Toast.LENGTH_SHORT).show();
+                    //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    bumpDetected();
                 }
             } else if (temp == 2) {
-                if ((mAccelLast - mAccelCurrent) > 7) {
-                    Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
-                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-
+                if ((mAccelLast - mAccelCurrent) > 3) {
+                   // Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
+                    //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                    bumpDetected();
                 }
             }
         }
