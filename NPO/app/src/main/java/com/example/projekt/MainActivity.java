@@ -229,19 +229,19 @@ public class MainActivity<ArrayListList> extends AppCompatActivity implements Se
             int temp = compare((int) X, (int) Y, (int) Z);
             if (temp == 0) {
                 if ((mAccelLast - mAccelCurrent) > 3) {
-                   // Toast.makeText(this, "Luknja na X", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Luknja na X", Toast.LENGTH_SHORT).show();
                     //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                     bumpDetected();
                 }
             } else if (temp == 1) {
                 if ((mAccelLast - mAccelCurrent) > 3) {
-                    //Toast.makeText(this, "Luknja na Y", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Luknja na Y", Toast.LENGTH_SHORT).show();
                     //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                     bumpDetected();
                 }
             } else if (temp == 2) {
                 if ((mAccelLast - mAccelCurrent) > 3) {
-                   // Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Luknja na Z", Toast.LENGTH_SHORT).show();
                     //v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
                     bumpDetected();
                 }
