@@ -56,71 +56,72 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Accelerometer.cs" />
+     <Compile Include="Assets\Scripts\GPS.cs" />
  <Reference Include="Unity.XR.Management">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Subsystem.Registration">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARSubsystems">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARSubsystems.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARCore">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARCore.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARCore.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARFoundation.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARFoundation.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARFoundation.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARFoundation">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARFoundation.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARFoundation.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.ARCore.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARCore.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.ARCore.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XR.LegacyInputHelpers">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="Unity.XR.Management.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.XR.LegacyInputHelpers">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

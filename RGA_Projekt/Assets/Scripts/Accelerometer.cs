@@ -14,6 +14,7 @@ public class Accelerometer : MonoBehaviour
     double mAccelCurrent;
     int temp;
     double X, Y, Z;
+    public GameObject Indicator;
 
     void Start()
     {
@@ -43,6 +44,7 @@ public class Accelerometer : MonoBehaviour
             if ((mAccelLast - mAccelCurrent) > 0.33)
             {
                 bumpAt.text = "Bump at: X";
+                Instantiate(Indicator, new Vector3(0,0,0), new Quaternion(0,0,0,0));
             }
         }
         else if (temp == 1)
@@ -50,6 +52,7 @@ public class Accelerometer : MonoBehaviour
             if ((mAccelLast - mAccelCurrent) > 0.33)
             {
                 bumpAt.text = "BumpAt: Y";
+                Instantiate(Indicator, new Vector3(0,0,0), new Quaternion(0,0,0,0));
             }
         }
         else if (temp == 2)
@@ -57,6 +60,7 @@ public class Accelerometer : MonoBehaviour
             if ((mAccelLast - mAccelCurrent) > 0.33)
             {
                 bumpAt.text = "BumpAt: Z";
+                Instantiate(Indicator, new Vector3(0,0,0), new Quaternion(0,0,0,0));
             }
         }
     }
