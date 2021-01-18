@@ -1,0 +1,10 @@
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\bin\Debug\PROJEKT_RV.exe.config
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\bin\Debug\PROJEKT_RV.exe
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\bin\Debug\PROJEKT_RV.pdb
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.csprojAssemblyReference.cache
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.Form1.resources
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.Properties.Resources.resources
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.csproj.GenerateResource.cache
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.csproj.CoreCompileInputs.cache
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.exe
+C:\FAKS\Projekt\ProjektFERI_infrastruktura\PROJEKT_RV\PROJEKT_RV\obj\Debug\PROJEKT_RV.pdb

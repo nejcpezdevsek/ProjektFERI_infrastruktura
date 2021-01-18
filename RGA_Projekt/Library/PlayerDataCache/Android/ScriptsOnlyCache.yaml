@@ -10,13 +10,6 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.XR.ARCore.Editor.dll:
     - UnityEditor.XR.ARCore.ARCoreSettings
-    Unity.XR.ARFoundation.dll:
-    - UnityEngine.XR.ARFoundation.ARCameraBackground
-    - UnityEngine.XR.ARFoundation.ARCameraManager
-    - UnityEngine.XR.ARFoundation.ARInputManager
-    - UnityEngine.XR.ARFoundation.ARPoseDriver
-    - UnityEngine.XR.ARFoundation.ARSession
-    - UnityEngine.XR.ARFoundation.ARSessionOrigin
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -33,8 +26,6 @@ ScriptsOnlyBuild:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
       Script: {instanceID: 0}
     - Class: 21
       Script: {instanceID: 0}
@@ -53,33 +44,21 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11818}
+      Script: {instanceID: 11816}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12028}
+      Script: {instanceID: 12048}
     - Class: 114
-      Script: {instanceID: 12050}
+      Script: {instanceID: 12628}
     - Class: 114
-      Script: {instanceID: 12630}
+      Script: {instanceID: 13102}
     - Class: 114
       Script: {instanceID: 13260}
     - Class: 114
-      Script: {instanceID: 13530}
-    - Class: 114
-      Script: {instanceID: 13754}
-    - Class: 114
       Script: {instanceID: 13886}
     - Class: 114
-      Script: {instanceID: 13914}
-    - Class: 114
-      Script: {instanceID: 14110}
-    - Class: 114
-      Script: {instanceID: 14248}
-    - Class: 114
       Script: {instanceID: 14364}
-    - Class: 114
-      Script: {instanceID: 16856}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -417,6 +396,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
+      Hash: 35fe9d9f67273deaae43986d58774c02
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GPS
+  - hash:
+      serializedVersion: 2
       Hash: 290afc8da8e459e0b8dc7444bfaf5e35
     assemblyName: Unity.XR.ARFoundation.dll
     namespaceName: UnityEngine.XR.ARFoundation
@@ -745,19 +730,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 35fe9d9f67273deaae43986d58774c02
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GPS
-  - hash:
-      serializedVersion: 2
-      Hash: e54c806844be0b2024dbb3c6bc222777
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GoogleMaps
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/danie/OneDrive/Desktop/ProjektFERI_infrastruktura-master/RGA_Projekt/build.apk
+  playerPath: C:/FAKS/Projekt/ProjektFERI_infrastruktura/RGA_Projekt/Builds/build1.apk

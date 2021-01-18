@@ -19,6 +19,7 @@ var usersRouter = require('./routes/users');
 var phoneDataRouter = require('./routes/phoneDataRoutes');
 var trafficSituationRouter = require('./routes/trafficSituationRoutes');
 var bumpsRouter = require('./routes/bumpsModelRoutes');
+var gpsDataRouter = require('./routes/gpsDataRoutes');
 
 var cors = require('cors');
 var allowedOrigins = ['http://localhost:4200','http://localhost:3000',
@@ -56,6 +57,7 @@ app.use('/users', usersRouter);
 app.use('/phonedata', phoneDataRouter);
 app.use('/trafficsituation', trafficSituationRouter);
 app.use('/bumps', bumpsRouter);
+app.use('/gpsdata', gpsDataRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
