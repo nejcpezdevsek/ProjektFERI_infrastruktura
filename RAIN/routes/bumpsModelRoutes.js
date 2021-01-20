@@ -14,9 +14,10 @@ router.get('/pregled_bumpov/list', bumpsModelController.showBumps)
 router.get('/:id', bumpsModelController.show);
 
 /*
- * POST
- */
+* POST
+*/
 router.post('/', bumpsModelController.create);
+router.post('/saveData', bumpsModelController.saveData);
 //router.post('/bumps', bumpsModelController.create);
 
 /*

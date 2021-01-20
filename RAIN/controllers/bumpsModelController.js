@@ -27,6 +27,26 @@ module.exports = {
     }
     ,
 
+    saveData: function (req, res) {
+        bumpsModelModel.find(function (err, bumpsModels) {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Error when getting bumpsModel.',
+                    error: err
+                });
+            }
+            var fs = require('fs');
+            var file = fs.createWriteStream('bumps.txt');
+            file.on('error', function(err) { console.log(err) });
+            bumpsModels.forEach(data => {
+                if((JSON.stringify(data.bumps))){
+                    file.write(JSON.stringify(data.bumps)+"\n");
+                }
+            })
+            file.end();
+            res.render('pregled_bumpov/list', bumpsModels);
+        });
+      },
     /**
      * bumpsModelController.show()
      */

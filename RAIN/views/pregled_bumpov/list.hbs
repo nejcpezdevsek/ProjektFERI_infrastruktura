@@ -1,18 +1,18 @@
+<form action="/bumps/saveData" method="post">
+  <button type="submit" style="margin-left:8px; margin-bottom:10px">Save data</button>
+</form>
+
 <table class="table table-hover">
-  <thead>
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Date</th>
       <th scope="col">Bumps</th>
     </tr>
-  </thead>
-  <tbody>
     {{#each this}}
-    <tr>
+    <tr class="neki">
         <td>{{name}}</td>
         <td>{{date}}</td>
         <td>{{bumps}}</td>
     </tr>
     {{/each}}   
-  </tbody>
 </table>
