@@ -180,41 +180,45 @@ namespace PROJEKT_RV
             vrni.Add(ConvertToDecimal(temp));
             temp.Clear();
             for (int i = 8; i < binaryList.Count; i++)
-            {
+            {       
                 if (binaryList[i] == 0 && binaryList[i + 1] == 0)
                 {
                     i += 2;
                     if (binaryList[i] == 0 && binaryList[i + 1] == 0)
                     {
                         i += 2;
-                        temp.AddRange(binaryList.Skip(i++).Take(2));
+                        temp.AddRange(binaryList.Skip(i).Take(2));
                         temp.Reverse();
                         vrni.Add(r1[ConvertToDecimal(temp)]);
                         temp.Clear();
+                        i++;
                     }
                     else if (binaryList[i] == 0 && binaryList[i + 1] == 1)
                     {
                         i += 2;
-                        temp.AddRange(binaryList.Skip(i+=2).Take(3));
+                        temp.AddRange(binaryList.Skip(i).Take(3));
                         temp.Reverse();
                         vrni.Add(r2[ConvertToDecimal(temp)]);
                         temp.Clear();
+                        i += 2;
                     }
                     else if (binaryList[i] == 1 && binaryList[i + 1] == 0)
                     {
                         i += 2;
-                        temp.AddRange(binaryList.Skip(i += 3).Take(4));
+                        temp.AddRange(binaryList.Skip(i).Take(4));
                         temp.Reverse();
-                        vrni.Add(r2[ConvertToDecimal(temp)]);
+                        vrni.Add(r3[ConvertToDecimal(temp)]);
                         temp.Clear();
+                        i += 3;
                     }
                     else if (binaryList[i] == 1 && binaryList[i + 1] == 1)
                     {
                         i += 2;
-                        temp.AddRange(binaryList.Skip(i += 4).Take(5));
+                        temp.AddRange(binaryList.Skip(i).Take(5));
                         temp.Reverse();
-                        vrni.Add(r2[ConvertToDecimal(temp)]);
+                        vrni.Add(r4[ConvertToDecimal(temp)]);
                         temp.Clear();
+                        i += 4;
                     }
 
                 }
